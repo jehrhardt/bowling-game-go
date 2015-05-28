@@ -2,7 +2,7 @@ package bowling
 
 import "testing"
 
-func TestGutter(t *testing.T) {
+func TestGutterGame(t *testing.T) {
 	game := new(Game)
 
 	for i := 0; i < 20; i++ {
@@ -12,6 +12,6 @@ func TestGutter(t *testing.T) {
 	score := game.Score()
 
 	if score != 0 {
-		t.Error("Gutter game:", "Expected", 0, ", was", score)
+		t.Error("Gutter game:", "Expected", 0, "was", score)
 	}
 }
