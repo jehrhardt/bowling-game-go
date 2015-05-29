@@ -12,20 +12,23 @@ func (g *Game) Roll(pins int) {
 
 func (g *Game) Score() int {
 	score := 0
-	i := 0
+	frameIndex := 0
 
 	for frame := 0; frame < 10; frame++ {
-		if g.rolls[i] + g.rolls[i + 1] == 10 {
-			score += g.rolls[i]
-			score += g.rolls[i + 1]
-			score += g.rolls[i + 2]
-			i += 2
+		if g.isSpare(frameIndex) {
+			score += 10
+			score += g.rolls[frameIndex + 2]
+			frameIndex += 2
 		} else {
-			score += g.rolls[i]
-			score += g.rolls[i + 1]
-			i += 2
+			score += g.rolls[frameIndex]
+			score += g.rolls[frameIndex + 1]
+			frameIndex += 2
 		}
 	}
 
 	return score
+}
+
+func (g *Game) isSpare(frameIndex int) bool {
+	return g.rolls[frameIndex] + g.rolls[frameIndex + 1] == 10
 }
