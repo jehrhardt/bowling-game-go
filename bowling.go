@@ -6,15 +6,18 @@ type Game struct {
 }
 
 func (g *Game) Roll(pins int) {
-	g.currentRoll++
 	g.rolls[g.currentRoll] = pins
+	g.currentRoll++
 }
 
 func (g *Game) Score() int {
 	score := 0
+	i := 0
 
-	for _, roll := range g.rolls {
-		score += roll
+	for frame := 0; frame < 10; frame++ {
+		score += g.rolls[i]
+		score += g.rolls[i + 1]
+		i += 2
 	}
 
 	return score
