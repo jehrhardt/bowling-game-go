@@ -15,9 +15,16 @@ func (g *Game) Score() int {
 	i := 0
 
 	for frame := 0; frame < 10; frame++ {
-		score += g.rolls[i]
-		score += g.rolls[i + 1]
-		i += 2
+		if g.rolls[i] + g.rolls[i + 1] == 10 {
+			score += g.rolls[i]
+			score += g.rolls[i + 1]
+			score += g.rolls[i + 2]
+			i += 2
+		} else {
+			score += g.rolls[i]
+			score += g.rolls[i + 1]
+			i += 2
+		}
 	}
 
 	return score

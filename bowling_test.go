@@ -27,3 +27,18 @@ func TestAllOnes(t *testing.T) {
 		t.Error("All ones:", "Expected", 20, "was", score)
 	}
 }
+
+func TestOneSpare(t *testing.T) {
+	game := new(Game)
+
+	game.Roll(5)
+	game.Roll(5)
+	game.Roll(3)
+	game.RollMany(17, 0)
+
+	score := game.Score()
+
+	if score != 16 {
+		t.Error("One spare:", "Expected", 16, "was", score)
+	}
+}
