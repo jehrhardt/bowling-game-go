@@ -15,7 +15,12 @@ func (g *Game) Score() int {
 	frameIndex := 0
 
 	for frame := 0; frame < 10; frame++ {
-		if g.isSpare(frameIndex) {
+		if g.isStrike(frameIndex) {
+			score += 10
+			score += g.rolls[frameIndex + 1]
+			score += g.rolls[frameIndex + 2]
+			frameIndex++
+		} else if g.isSpare(frameIndex) {
 			score += 10
 			score += g.rolls[frameIndex + 2]
 			frameIndex += 2
@@ -31,4 +36,8 @@ func (g *Game) Score() int {
 
 func (g *Game) isSpare(frameIndex int) bool {
 	return g.rolls[frameIndex] + g.rolls[frameIndex + 1] == 10
+}
+
+func (g *Game) isStrike(frameIndex int) bool {
+	return g.rolls[frameIndex] == 10
 }

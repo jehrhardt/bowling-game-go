@@ -13,6 +13,10 @@ func (g *Game) rollSpare() {
 	g.Roll(5)
 }
 
+func (g *Game) rollStrike() {
+	g.Roll(10)
+}
+
 func TestGutterGame(t *testing.T) {
 	game := new(Game)
 	game.rollMany(20, 0)
@@ -25,7 +29,7 @@ func TestGutterGame(t *testing.T) {
 
 func TestAllOnes(t *testing.T) {
 	game := new(Game)
-	game.RollMany(20, 1)
+	game.rollMany(20, 1)
 	score := game.Score()
 
 	if score != 20 {
@@ -44,5 +48,20 @@ func TestOneSpare(t *testing.T) {
 
 	if score != 16 {
 		t.Error("One spare:", "Expected", 16, "was", score)
+	}
+}
+
+func TestOneStrike(t *testing.T) {
+	game := new(Game)
+
+	game.rollStrike()
+	game.Roll(3)
+	game.Roll(4)
+	game.rollMany(16, 0)
+
+	score := game.Score()
+
+	if score != 24 {
+		t.Error("One strike:", "Expected", 24, "was", score)
 	}
 }
