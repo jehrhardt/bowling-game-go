@@ -65,3 +65,15 @@ func TestOneStrike(t *testing.T) {
 		t.Error("One strike:", "Expected", 24, "was", score)
 	}
 }
+
+func TestPerfectGame(t *testing.T) {
+	game := new(Game)
+
+	game.rollMany(12, 10)
+
+	score := game.Score()
+
+	if score != 300 {
+		t.Error("Perfect game:", "Expected", 300, "was", score)
+	}
+}
