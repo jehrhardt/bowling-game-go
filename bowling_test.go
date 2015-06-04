@@ -2,15 +2,20 @@ package bowling
 
 import "testing"
 
-func (g *Game) RollMany(runs int, pins int) {
+func (g *Game) rollMany(runs int, pins int) {
 	for i := 0; i < runs; i++ {
 		g.Roll(pins)
 	}
 }
 
+func (g *Game) rollSpare() {
+	g.Roll(5)
+	g.Roll(5)
+}
+
 func TestGutterGame(t *testing.T) {
 	game := new(Game)
-	game.RollMany(20, 0)
+	game.rollMany(20, 0)
 	score := game.Score()
 
 	if score != 0 {
@@ -31,10 +36,9 @@ func TestAllOnes(t *testing.T) {
 func TestOneSpare(t *testing.T) {
 	game := new(Game)
 
-	game.Roll(5)
-	game.Roll(5)
+	game.rollSpare()
 	game.Roll(3)
-	game.RollMany(17, 0)
+	game.rollMany(17, 0)
 
 	score := game.Score()
 
